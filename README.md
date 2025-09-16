@@ -1,29 +1,9 @@
-# MySQL 8.0 + phpMyAdmin en Docker (Markdown listo para GitHub)
+# MySQL 8.0 + phpMyAdmin en Docker
 
-```bash
-# 1) Red Docker
-docker network create mysql-network
-
-# 2) Volumen (persistencia)
-docker volume create mysql-volume
-
-# 3) Contenedor MySQL (sustituye los placeholders)
-docker run -d \
-  --name mysql-container \
-  --network mysql-network \
-  -e MYSQL_ROOT_PASSWORD=<ROOT_PASSWORD> \
-  -e MYSQL_DATABASE=<DB_NAME> \
-  -e MYSQL_USER=<DB_USER> \
-  -e MYSQL_PASSWORD=<DB_PASSWORD> \
-  -v $(pwd)/mysql-volumen:/var/lib/mysql \
-  -v $(pwd)/mysql-init:/docker-entrypoint-initdb.d \
-  mysql:8.0
-
-# 4) Contenedor phpMyAdmin
-docker run -d \
-  --name phpmyadmin-container \
-  --network mysql-network \
-  -e PMA_HOST=mysql-container \
-  -e PMA_PORT=3306 \
-  -p 8080:80 \
-  phpmyadmin:5.2.1
+| Paso | Descripción | Comando |
+|------|-------------|---------|
+| 1 | Crear red Docker | ```bash\ndocker network create mysql-network\n``` |
+| 2 | Crear volumen para persistencia | ```bash\ndocker volume create mysql-volume\n``` |
+| 3 | Crear contenedor de MySQL (reemplaza placeholders) | ```bash\ndocker run -d \\\n  --name mysql-container \\\n  --network mysql-network \\\n  -e MYSQL_ROOT_PASSWORD=<ROOT_PASSWORD> \\\n  -e MYSQL_DATABASE=<DB_NAME> \\\n  -e MYSQL_USER=<DB_USER> \\\n  -e MYSQL_PASSWORD=<DB_PASSWORD> \\\n  -v $(pwd)/mysql-volumen:/var/lib/mysql \\\n  -v $(pwd)/mysql-init:/docker-entrypoint-initdb.d \\\n  mysql:8.0\n``` |
+| 4 | Crear contenedor de phpMyAdmin | ```bash\ndocker run -d \\\n  --name phpmyadmin-container \\\n  --network mysql-network \\\n  -e PMA_HOST=mysql-container \\\n  -e PMA_PORT=3306 \\\n  -p 8080:80 \\\n  phpmyadmin:5.2.1\n``` |
+| 5 | Acceso desde navegador | Abre `http://localhost:8080/index.php?route=/` e ingresa con las credenciales configuradas en el contenedor MySQL |
