@@ -1,6 +1,6 @@
 # MySQL 8.0 + phpMyAdmin en Docker
 
-| Paso | Descripción | Comando | Resultado |
+| Paso | Descripción | Comando |
 |------|-------------|---------|
 | 1 | Crear red Docker | ```network create mysql-network``` |<img width="886" height="194" alt="image" src="https://github.com/user-attachments/assets/ad87f830-8578-4a33-8998-7c051ba28854" />|
 | 2 | Crear volumen para persistencia | ```bash\ndocker volume create mysql-volume\n``` |
